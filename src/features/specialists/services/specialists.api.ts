@@ -1,0 +1,58 @@
+import type { Service } from "../types";
+
+export const mockServices: Service[] = [
+  {
+    id: "1",
+    title: "Incorporation of a new company",
+    price: "RM 2,000",
+    purchases: 20,
+    duration: "3 Days",
+    approvalStatus: "approved",
+    publishStatus: "published",
+  },
+  {
+    id: "2",
+    title: "Incorporation of a new company",
+    price: "RM 2,000",
+    purchases: 0,
+    duration: "1 Day",
+    approvalStatus: "under-review",
+    publishStatus: "published",
+  },
+  {
+    id: "3",
+    title: "Incorporation of a new company",
+    price: "RM 2,000",
+    purchases: 431,
+    duration: "14 Days",
+    approvalStatus: "approved",
+    publishStatus: "not-published",
+  },
+  {
+    id: "4",
+    title: "Incorporation of a new company",
+    price: "RM 2,000",
+    purchases: 0,
+    duration: "7 Days",
+    approvalStatus: "under-review",
+    publishStatus: "published",
+  },
+  {
+    id: "5",
+    title: "Incorporation of a new company",
+    price: "RM 2,000",
+    purchases: 1283,
+    duration: "4 Days",
+    approvalStatus: "rejected",
+    publishStatus: "not-published",
+  },
+  {
+    id: "6",
+    title: "Incorporation of a new company",
+    price: "RM 2,000",
+    purchases: 9180,
+    duration: "5 Days",
+    approvalStatus: "rejected",
+    publishStatus: "not-published",
+  },
+];
