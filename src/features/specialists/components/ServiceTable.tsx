@@ -1,6 +1,7 @@
 import { StatusBadge } from "@/components/shared";
 import { cn } from "@/lib/utils";
 import { MoreVertical } from "lucide-react";
+import { Checkbox } from "../../../components/ui/checkbox";
 import { type Service } from "../types";
 
 interface ServiceTableProps {
@@ -29,14 +30,10 @@ export function ServiceTable({
         <thead>
           <tr className="border-b border-border">
             <th className="w-12 p-4">
-              <input
-                type="checkbox"
-                checked={allSelected}
-                ref={(el) => {
-                  if (el) el.indeterminate = someSelected;
-                }}
-                onChange={(e) => onSelectAll(e.target.checked)}
-                className="h-4 w-4 rounded border-input text-primary focus:ring-primary"
+              <Checkbox
+                checked={allSelected  ? true : someSelected ? "indeterminate" : false }
+                onCheckedChange={onSelectAll}
+                className="size-4 rounded border-input text-primary focus:ring-primary"
                 aria-label="Select all services"
               />
             </th>
@@ -73,13 +70,13 @@ export function ServiceTable({
               )}
             >
               <td className="p-4">
-                <input
-                  type="checkbox"
+                <Checkbox 
                   checked={isSelected(service.id)}
-                  onChange={() => onSelectToggle(service.id)}
+                  onCheckedChange={() => onSelectToggle(service.id)}
                   className="size-4 rounded border-input text-primary focus:ring-primary"
                   aria-label={`Select ${service.title}`}
                 />
+                
               </td>
               <td className="p-4">
                 <span className="text-sm">{service.title}</span>
