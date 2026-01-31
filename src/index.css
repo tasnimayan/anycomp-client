@@ -42,7 +42,6 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-
 @font-face {
   font-family: "Proxima Nova";
   src: url("/src/assets/fonts/ProximaNova-Regular.ttf") format("truetype");
