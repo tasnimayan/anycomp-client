@@ -1,4 +1,3 @@
-import { PublicLayout } from "../../../layouts/PublicLayout";
 import { Breadcrumb, FilterBar, PageHeader, ServiceGrid } from "../components";
 import { useServiceFilters } from "../hooks/useServiceFilters";
 import { sampleServices } from "../services/registerCompany.api";
@@ -10,10 +9,11 @@ const breadcrumbItems = [
 ];
 
 export const RegisterCompanyPage = () => {
-  const { filters, filteredServices, setPriceFilter, setSortFilter } = useServiceFilters(sampleServices);
+  const { filters, filteredServices, setPriceFilter, setSortFilter } =
+    useServiceFilters(sampleServices);
 
   return (
-    <PublicLayout>
+    <>
       {/* Breadcrumb */}
       <div className="mb-6">
         <Breadcrumb items={breadcrumbItems} />
@@ -37,6 +37,6 @@ export const RegisterCompanyPage = () => {
 
       {/* Service Grid */}
       <ServiceGrid services={filteredServices} />
-    </PublicLayout>
+    </>
   );
 };

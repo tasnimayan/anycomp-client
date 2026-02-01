@@ -1,7 +1,7 @@
+import { BreadCrumb } from "@/components/layout/BreadCrumb";
 import { Pagination, SearchInput } from "@/components/shared";
 import { useMemo, useState } from "react";
 import { useTableSelection } from "../../../hooks/useTableSelection";
-import DashboardLayout from "../../../layouts/DashboardLayout";
 import { ServiceActions, ServiceTable, ServiceTabs } from "../components";
 import { mockServices } from "../services/specialists.api";
 import { type ServiceTabFilter } from "../types";
@@ -63,7 +63,13 @@ export function SpecialistsPage() {
   };
 
   return (
-    <DashboardLayout breadcrumb={["Dashboard"]} title="Services">
+    <>
+      {/* Breadcrumb */}
+      <BreadCrumb breadcrumb={["Dashboard"]} />
+
+      {/* Page Title */}
+      <h1 className="text-lg font-semibold text-heading mb-6">Services</h1>
+
       {/* Page Header */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-foreground">Specialists</h2>
@@ -107,6 +113,6 @@ export function SpecialistsPage() {
           className="mt-6"
         />
       )}
-    </DashboardLayout>
+    </>
   );
 }

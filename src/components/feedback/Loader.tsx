@@ -1,5 +1,11 @@
-import { Table, TableBody, TableCell, TableHeader, TableRow } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 interface DataTableSkeletonProps {
   columns: number;
@@ -7,7 +13,11 @@ interface DataTableSkeletonProps {
   selectable?: boolean;
 }
 
-export const DataTableSkeleton = ({ columns, rows = 5, selectable = false }: DataTableSkeletonProps) => {
+export const DataTableSkeleton = ({
+  columns,
+  rows = 5,
+  selectable = false,
+}: DataTableSkeletonProps) => {
   return (
     <Table>
       <TableHeader>
@@ -38,5 +48,14 @@ export const DataTableSkeleton = ({ columns, rows = 5, selectable = false }: Dat
         ))}
       </TableBody>
     </Table>
+  );
+};
+
+// Loading fallback component
+export const PageLoader = () => {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+    </div>
   );
 };

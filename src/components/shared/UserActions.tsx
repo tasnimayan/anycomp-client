@@ -1,9 +1,9 @@
 import { UserAvatar } from "@/components/shared";
 import { Bell, Mail } from "lucide-react";
 
-export function TopHeader() {
+export function UserActions() {
   return (
-    <header className="h-12 shadow bg-white flex items-center justify-end px-6 gap-3">
+    <>
       <button
         className="relative text-muted-foreground hover:text-foreground transition-colors"
         aria-label="Messages"
@@ -20,6 +20,6 @@ export function TopHeader() {
       </button>
 
       <UserAvatar name="Gwen Lam" size="icon" />
-    </header>
+    </>
   );
 }

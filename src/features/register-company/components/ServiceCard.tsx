@@ -1,3 +1,5 @@
+import { UserAvatar } from "../../../components/shared";
+
 interface ServiceCardProps {
   bannerImage: string;
   providerName: string;
@@ -20,7 +22,7 @@ export const ServiceCard = ({
   return (
     <article className="service-card group cursor-pointer">
       {/* Banner Image */}
-      <div className="aspect-[4/3] overflow-hidden">
+      <div className="aspect-4/3 overflow-hidden">
         <img
           src={bannerImage}
           alt={title}
@@ -32,19 +34,17 @@ export const ServiceCard = ({
       <div className="p-4">
         {/* Provider Info */}
         <div className="flex items-center gap-2 mb-2">
-          <img
-            src={providerAvatar}
-            alt={providerName}
-            className="w-7 h-7 rounded-full object-cover"
-          />
+          <UserAvatar imageSrc={providerAvatar} name={providerName} size="xs" />
           <div className="flex items-center gap-1.5 text-sm">
-            <span className="font-semibold text-foreground">{providerName}</span>
+            <span className="font-semibold text-foreground">
+              {providerName}
+            </span>
             <span className="text-muted-foreground">- {providerRole}</span>
           </div>
         </div>
 
         {/* Service Title */}
-        <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+        <p className="text-sm text-muted-foreground mb-1 line-clamp-2">
           {title}
         </p>
 

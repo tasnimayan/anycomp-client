@@ -1,5 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { Button } from "../../../components/ui/button";
+import { cn } from "../../../lib/utils";
 
 interface FilterOption {
   label: string;
@@ -13,7 +15,12 @@ interface FilterButtonProps {
   onChange?: (value: string) => void;
 }
 
-const FilterButton = ({ label, options, value, onChange }: FilterButtonProps) => {
+const FilterButton = ({
+  label,
+  options,
+  value,
+  onChange,
+}: FilterButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (optionValue: string) => {
@@ -23,20 +30,25 @@ const FilterButton = ({ label, options, value, onChange }: FilterButtonProps) =>
 
   return (
     <div className="relative">
-      <button
-        className="filter-button"
+      <Button
+        variant="outline"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
       >
         {label}
-        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
-      </button>
+        <ChevronDown
+          className={cn(
+            "size-4 transition-transform",
+            isOpen ? "rotate-180" : "",
+          )}
+        />
+      </Button>
 
       {isOpen && (
         <>
-          <div 
-            className="fixed inset-0 z-10" 
+          <div
+            className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
             aria-hidden="true"
           />
@@ -85,7 +97,12 @@ const sortOptions: FilterOption[] = [
   { label: "Rating", value: "rating" },
 ];
 
-export const FilterBar = ({ onPriceChange, onSortChange, priceValue, sortValue }: FilterBarProps) => {
+export const FilterBar = ({
+  onPriceChange,
+  onSortChange,
+  priceValue,
+  sortValue,
+}: FilterBarProps) => {
   return (
     <div className="flex items-center gap-3 flex-wrap">
       <FilterButton

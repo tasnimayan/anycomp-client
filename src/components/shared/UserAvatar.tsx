@@ -3,12 +3,13 @@ import { cn } from "@/lib/utils";
 interface UserAvatarProps {
   name: string;
   imageSrc?: string;
-  size?: "icon" | "sm" | "md" | "lg";
+  size?: "icon" | "xs" | "sm" | "md" | "lg";
   className?: string;
 }
 
 const sizeClasses = {
   icon: "size-5 text-[10px]",
+  xs: "size-7 text-xs",
   sm: "size-8 text-xs",
   md: "size-10 text-sm",
   lg: "size-12 text-base",
