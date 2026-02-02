@@ -17,6 +17,12 @@ const RegisterCompanyPage = lazy(() =>
   })),
 );
 
+const CreateServicePage = lazy(() =>
+  import("@/features/specialists/pages/CreateServicePage").then((m) => ({
+    default: m.CreateServicePage,
+  })),
+);
+
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
 // Route path constants
@@ -24,6 +30,7 @@ export const ROUTES = {
   HOME: "/",
   REGISTER_COMPANY: "/register-company",
   LOGIN: "/login",
+  CREATE_SERVICE: "/specialists/create",
 } as const;
 
 // Route configuration
@@ -38,6 +45,10 @@ export const routes: RouteObject[] = [
           {
             path: ROUTES.HOME,
             element: <SpecialistsPage />,
+          },
+          {
+            path: ROUTES.CREATE_SERVICE,
+            element: <CreateServicePage />,
           },
         ],
       },

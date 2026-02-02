@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { Suspense } from "react";
 import { BrowserRouter, useRoutes } from "react-router-dom";
 import { PageLoader } from "../components/feedback/Loader";
@@ -13,6 +14,7 @@ export const AppRouter = () => {
   return (
     <BrowserRouter>
       <AppRoutes />
+      <Toaster />
     </BrowserRouter>
   );
 };
