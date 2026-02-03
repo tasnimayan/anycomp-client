@@ -17,8 +17,8 @@ import { Plus, X } from "lucide-react";
 import { useState } from "react";
 import { useForm, useFormContext, useWatch } from "react-hook-form";
 import { z } from "zod";
+import ImageUpload from "../../../components/shared/ImageUpload";
 import { FeeFormCard } from "../components/FeeFormCard";
-import { ServiceImageUpload } from "../components/ServiceImageUpload";
 
 // Constants
 const MAX_WORDS = 500;
@@ -80,7 +80,7 @@ export function CreateServicePage() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-8">
         <div className="flex-1 space-y-6">
           <ServiceTitleField />
-          <ServiceImagesField />
+          <ImageUpload />
           <ServiceDescriptionField />
           <ServiceOfferingsField />
         </div>
@@ -107,7 +107,7 @@ function ServiceTitleField() {
           <FormControl>
             <Input
               {...field}
-              className="h-10 text-lg font-semibold"
+              className="h-10 text-lg font-medium"
               placeholder="Enter service title"
             />
           </FormControl>
@@ -115,15 +115,6 @@ function ServiceTitleField() {
         </FormItem>
       )}
     />
-  );
-}
-
-function ServiceImagesField() {
-  return (
-    <div className="space-y-2">
-      <FormLabel className="text-sm font-medium">Service Images</FormLabel>
-      <ServiceImageUpload />
-    </div>
   );
 }
 
@@ -136,32 +127,29 @@ function ServiceDescriptionField() {
     : 0;
 
   return (
-    <div className="space-y-2">
-      <Separator />
-      <div className="py-4">
-        <FormField
-          control={control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-sm font-medium">Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  {...field}
-                  placeholder="Describe your service here..."
-                  className="min-h-[120px] resize-none"
-                />
-              </FormControl>
-              <div className="flex justify-between items-center">
-                <FormMessage />
-                <p className="text-xs text-muted-foreground ml-auto">
-                  {wordCount}/{MAX_WORDS} words
-                </p>
-              </div>
-            </FormItem>
-          )}
-        />
-      </div>
+    <div className="py-4">
+      <FormField
+        control={control}
+        name="description"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-sm font-medium">Description</FormLabel>
+            <FormControl>
+              <Textarea
+                {...field}
+                placeholder="Describe your service here..."
+                className="min-h-[120px] resize-none"
+              />
+            </FormControl>
+            <div className="flex justify-between items-center">
+              <FormMessage />
+              <p className="text-xs text-muted-foreground ml-auto">
+                {wordCount}/{MAX_WORDS} words
+              </p>
+            </div>
+          </FormItem>
+        )}
+      />
     </div>
   );
 }
@@ -176,7 +164,7 @@ function ServiceOfferingsField() {
     setValue(
       "offerings",
       currentOfferings.filter((_, i) => i !== index),
-      { shouldValidate: true }
+      { shouldValidate: true },
     );
   };
 
