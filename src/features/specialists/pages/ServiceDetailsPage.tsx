@@ -1,11 +1,12 @@
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
+import { Button } from "../../../components/ui/button";
 import { CompanySecretarySection } from "../components/CompanySecretarySection";
 import { EditServiceSheet } from "../components/EditServiceSheet";
-import { ProfessionalFeeCard } from "../components/ProfessionalFeeCard";
+import { FeeSummaryCard } from "../components/FeeSummaryCard";
 import { ServiceImageUpload } from "../components/ServiceImageUpload";
 
-export function ServiceDetailsPage() {
+export default function ServiceDetailsPage() {
   const [editSheetOpen, setEditSheetOpen] = useState(false);
 
   const handleEdit = () => {
@@ -13,26 +14,17 @@ export function ServiceDetailsPage() {
   };
 
   const handlePublish = () => {
-    // Handle publish action
     console.log("Publishing service...");
   };
 
-  const handleConfirmEdit = (data: {
-    title: string;
-    description: string;
-    completionDays: number;
-    price: number;
-    additionalOfferings: string[];
-  }) => {
-    console.log("Service updated:", data);
+  const onSave = () => {
+    console.log("Saving service...");
   };
 
   return (
     <>
       <div className="flex gap-8">
-        {/* Left content */}
         <div className="flex-1 space-y-6">
-          {/* Title */}
           <h1 className="text-xl font-semibold text-foreground">
             Register a new company | Private Limited - Sdn Bhd
           </h1>
@@ -41,45 +33,46 @@ export function ServiceDetailsPage() {
           <ServiceImageUpload />
 
           {/* Description section */}
-          <div className="space-y-2">
-            <Separator />
-            <div className="py-4">
+          <div className="space-y-4">
+            <div>
               <h3 className="font-semibold text-foreground mb-1">
                 Description
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground pb-4">
                 Describe your service here
               </p>
             </div>
-          </div>
 
-          {/* Additional Offerings section */}
-          <div className="space-y-2">
             <Separator />
-            <div className="py-4">
+            <div>
               <h3 className="font-semibold text-foreground mb-1">
                 Additional Offerings
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground pb-4">
                 Enhance your service by adding additional offerings
               </p>
             </div>
-          </div>
 
-          {/* Company Secretary section */}
-          <div>
-            <Separator className="mb-4" />
+            <Separator className="mb-8" />
             <CompanySecretarySection />
           </div>
         </div>
 
-        {/* Right sidebar - Professional Fee Card */}
-        <div className="w-[280px] shrink-0">
-          <ProfessionalFeeCard
+        {/* Right sidebar - Fee Summary Card */}
+        <div className="w-[350px] shrink-0">
+          <div className="flex gap-2 mb-4">
+            <Button variant="outline" className="flex-1" onClick={handleEdit}>
+              Edit
+            </Button>
+            <Button className="flex-1" onClick={handlePublish}>
+              Publish
+            </Button>
+          </div>
+
+          <FeeSummaryCard
             basePrice={1800}
             processingFee={540}
-            onEdit={handleEdit}
-            onPublish={handlePublish}
+            totalPrice={2340}
           />
         </div>
       </div>
@@ -88,7 +81,7 @@ export function ServiceDetailsPage() {
       <EditServiceSheet
         open={editSheetOpen}
         onOpenChange={setEditSheetOpen}
-        onConfirm={handleConfirmEdit}
+        onConfirm={onSave}
       />
     </>
   );

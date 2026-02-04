@@ -7,6 +7,13 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useMemo } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
@@ -35,17 +42,16 @@ export function FeeFormCard({ onSaveDraft }: FeeFormCardProps) {
     };
   }, [price]);
 
-  const formatCurrency = (value: number) =>
-    value.toLocaleString("en-MY", { minimumFractionDigits: 2 });
-
   const handleSaveDraft = () => {
     onSaveDraft?.();
   };
 
   return (
-    <Card className="sticky top-4">
+    <Card className="sticky top-4 border-none rounded-xs shadow-xl">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-semibold">Professional Fee</CardTitle>
+        <CardTitle className="text-xl font-semibold leading-1.5">
+          Professional Fee
+        </CardTitle>
         <p className="text-sm text-muted-foreground">
           Set a rate for your service
         </p>
@@ -58,15 +64,23 @@ export function FeeFormCard({ onSaveDraft }: FeeFormCardProps) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Estimated Completion (Days)</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  min="1"
-                  {...field}
-                  onChange={(e) => field.onChange(parseInt(e.target.value) || 1)}
-                  className="h-10"
-                />
-              </FormControl>
+              <Select
+                value={String(field.value ?? 1)}
+                onValueChange={(value) => field.onChange(parseInt(value, 10))}
+              >
+                <FormControl>
+                  <SelectTrigger className="h-10 w-full">
+                    <SelectValue placeholder="Select days" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {Array.from({ length: 14 }, (_, i) => i + 1).map((days) => (
+                    <SelectItem key={days} value={String(days)}>
+                      {days === 1 ? "1 day" : `${days} days`}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </FormItem>
           )}
         />
@@ -80,7 +94,7 @@ export function FeeFormCard({ onSaveDraft }: FeeFormCardProps) {
               <FormLabel>Base Price</FormLabel>
               <FormControl>
                 <div className="flex">
-                  <div className="flex items-center gap-2 px-3 border border-r-0 rounded-l-md bg-muted">
+                  <div className="flex items-center gap-2 px-3 border-r-0 rounded-l-md bg-muted">
                     <span className="text-sm">🇲🇾</span>
                     <span className="text-sm font-medium">MYR</span>
                   </div>
@@ -89,7 +103,9 @@ export function FeeFormCard({ onSaveDraft }: FeeFormCardProps) {
                     step="0.01"
                     min="0"
                     {...field}
-                    onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                    onChange={(e) =>
+                      field.onChange(parseFloat(e.target.value) || 0)
+                    }
                     className="h-10 rounded-l-none"
                   />
                 </div>
@@ -100,12 +116,11 @@ export function FeeFormCard({ onSaveDraft }: FeeFormCardProps) {
 
         <Separator />
 
-        {/* Price breakdown */}
-        <PriceBreakdown
+        {/* Price summary */}
+        <PriceSummary
           basePrice={basePrice}
           processingFee={processingFee}
           totalPrice={totalPrice}
-          formatCurrency={formatCurrency}
         />
 
         {/* Action buttons */}
@@ -113,9 +128,9 @@ export function FeeFormCard({ onSaveDraft }: FeeFormCardProps) {
           <Button
             type="submit"
             disabled={isSubmitting || !isValid}
-            className="w-full bg-sidebar-background hover:bg-sidebar-background/90"
+            className="w-full"
           >
-            {isSubmitting ? "Publishing..." : "Publish Service"}
+            {isSubmitting ? "Publishing..." : "Publish"}
           </Button>
           <Button
             type="button"
@@ -132,34 +147,38 @@ export function FeeFormCard({ onSaveDraft }: FeeFormCardProps) {
   );
 }
 
-interface PriceBreakdownProps {
+interface PriceSummaryProps {
   basePrice: number;
   processingFee: number;
   totalPrice: number;
-  formatCurrency: (value: number) => string;
 }
 
-function PriceBreakdown({
+export const PriceSummary = ({
   basePrice,
   processingFee,
   totalPrice,
-  formatCurrency,
-}: PriceBreakdownProps) {
+}: PriceSummaryProps) => {
   return (
-    <div className="space-y-3">
+    <div className="space-y-1 text-muted-foreground">
       <div className="flex justify-between text-sm">
-        <span className="text-muted-foreground">Base Price</span>
-        <span className="font-medium">MYR {formatCurrency(basePrice)}</span>
+        <span>Base Price</span>
+        <span className="font-medium">RM {basePrice}</span>
       </div>
       <div className="flex justify-between text-sm">
-        <span className="text-muted-foreground">Processing Fee (30%)</span>
-        <span className="font-medium">MYR {formatCurrency(processingFee)}</span>
+        <span>
+          Service Processing Fee <span className="text-xs">(30%)</span>
+        </span>
+        <span className="font-medium">RM {processingFee}</span>
+      </div>
+      <div className="flex justify-between text-sm">
+        <span>Total</span>
+        <span className="font-medium">RM {totalPrice}</span>
       </div>
       <Separator />
       <div className="flex justify-between">
-        <span className="font-semibold">Total</span>
-        <span className="font-bold text-lg">MYR {formatCurrency(totalPrice)}</span>
+        <span className="">Your returns</span>
+        <span>RM {basePrice}</span>
       </div>
     </div>
   );
-}
+};

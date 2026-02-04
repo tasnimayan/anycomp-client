@@ -1,48 +1,50 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { UserAvatar } from "../../../components/shared";
 
-export function CompanySecretarySection() {
+export const CompanySecretarySection = () => {
   return (
     <div className="space-y-4">
       <h3 className="font-semibold text-foreground">Company Secretary</h3>
 
       <div className="flex gap-8">
         {/* Profile card */}
-        <div className="space-y-3">
+        <div>
           <div className="flex items-center gap-3">
-            <UserAvatar name="Grace Lam" size="lg" />
-            <div>
+            <UserAvatar name="Grace Lam" className="size-18" />
+            <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="font-medium text-sm">Grace Lam</span>
-                <Badge
-                  variant="secondary"
-                  className="text-xs bg-primary/10 text-primary"
-                >
-                  <CheckCircle className="h-3 w-3 mr-1" />
-                  Specialist
-                </Badge>
+                <span className="font-medium text-sm leading-none">
+                  Grace Lam
+                </span>
+                <span className="text-xs">
+                  <CheckCircle2 className="size-3 mr-1 inline-block text-success" />
+                  Verified
+                </span>
               </div>
               <p className="text-xs text-muted-foreground">
-                Corporate Secretary/Sdn Bhd
+                Corpsec Services Sdn Bhd
               </p>
+              <Button size="sm">View Profile</Button>
             </div>
           </div>
           <Button
-            size="sm"
-            className="bg-sidebar-background hover:bg-sidebar-background/90 text-xs h-7"
+            size="xs"
+            className="bg-sidebar-background hover:bg-sidebar-background/90 text-xs"
           >
             View Profile
           </Button>
 
-          <p className="text-xs text-muted-foreground max-w-xs leading-relaxed">
+          <p className="text-xs text-muted-foreground max-w-sm leading-relaxed">
             A company secretarial service founded by Grace, who believes that
-            every entrepreneur deserves reliable and affordable support.
-            Inspired by the spirit of entrepreneurship, Grace treats every
-            client's business as if it were her own – attentive to detail,
-            committed to excellence, and focused on building relationships that
-            help businesses thrive well beyond compliance.
+            every company deserves clarity, confidence, and care in their
+            compliance journey. Inspired by the spirit of entrepreneurship, Aida
+            treats every client’s business as if it were her own — attentive to
+            detail, committed to deadlines, and focused on growth. Step into a
+            partnership built on trust, transparency, and professional
+            excellence. Whether you’re just starting out or managing a growing
+            company, Aida is here to make your corporate governance smooth,
+            secure, and stress-free. Your company’s peace of mind starts here
           </p>
         </div>
 
@@ -64,4 +66,4 @@ export function CompanySecretarySection() {
       </div>
     </div>
   );
-}
+};

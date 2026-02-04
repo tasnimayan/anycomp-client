@@ -168,16 +168,13 @@ export function EditServiceSheet({
         {/* Footer buttons */}
         <div className="p-6 pt-4 border-t flex gap-3">
           <Button
-            variant="outline"
+            variant="destructive"
             onClick={() => onOpenChange(false)}
-            className="flex-1 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
+            className="flex-1"
           >
             Cancel
           </Button>
-          <Button
-            onClick={handleConfirm}
-            className="flex-1 bg-sidebar-background hover:bg-sidebar-background/90"
-          >
+          <Button onClick={handleConfirm} className="flex-1">
             Confirm
           </Button>
         </div>
